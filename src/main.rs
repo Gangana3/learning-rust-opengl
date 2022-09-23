@@ -11,22 +11,20 @@ use std::ffi::c_void;
 const INITIAL_WINDOW_WIDTH: u32 = 800;
 const INITIAL_WINDOW_HEIGHT: u32 = 600;
 
-fn start_event_loop(sdl_context: &sdl2::Sdl, window: &Window) {
+fn handle_events(sdl_context: &sdl2::Sdl, window: &Window) {
     let mut event_pump = sdl_context.event_pump().unwrap();
-    loop {
-        for event in event_pump.poll_iter() {
-            match event {
-                Event::Quit { .. } => {
-                    exit(0);
-                }
-                Event::Window { win_event, .. } => {
-                    if let WindowEvent::Resized(width, height) = win_event {
-                        println!("Resizing!!!");
-                        unsafe { gl::Viewport(0, 0, width, height) }
-                    }
-                }
-                _ => { println!("Unhandled event event.") }
+    for event in event_pump.poll_iter() {
+        match event {
+            Event::Quit { .. } => {
+                exit(0);
             }
+            Event::Window { win_event, .. } => {
+                if let WindowEvent::Resized(width, height) = win_event {
+                    println!("Resizing!!!");
+                    unsafe { gl::Viewport(0, 0, width, height) }
+                }
+            }
+            _ => { println!("Unhandled event event.") }
         }
     }
 }
@@ -62,10 +60,15 @@ fn main() {
 
     // Initialize & Open a new window
     let window = open_window(&sdl_context);
-
+    let gl_context = window.gl_create_context().unwrap();
     initialize_gl(&sdl_context);
 
-    // Start the event SDL event loop which takes care responding to buttons,
-    // clicks, and other events.
-    start_event_loop(&sdl_context, &window);
+    loop {
+        handle_events(&sdl_context, &window);
+        unsafe {
+            gl::ClearColor(0.2, 0.3, 0.3, 1.0);
+            gl::Clear(gl::COLOR_BUFFER_BIT);
+            window.gl_swap_window();
+        }
+    }
 }
