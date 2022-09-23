@@ -4,14 +4,12 @@ extern crate sdl2;
 use sdl2::event::{Event, WindowEvent};
 use std::process::exit;
 use sdl2::video::Window;
-use gl::types::*;
-use sdl2::VideoSubsystem;
 use std::ffi::c_void;
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
 const INITIAL_WINDOW_HEIGHT: u32 = 600;
 
-fn handle_events(sdl_context: &sdl2::Sdl, window: &Window) {
+fn handle_events(sdl_context: &sdl2::Sdl) {
     let mut event_pump = sdl_context.event_pump().unwrap();
     for event in event_pump.poll_iter() {
         match event {
@@ -40,7 +38,9 @@ fn open_window(sdl_context: &sdl2::Sdl) -> Window {
 }
 
 /// Prepare everything needed before we can start rendering some sh*t
-fn initialize_gl(sdl_context: &sdl2::Sdl) {
+fn initialize_gl(sdl_context: &sdl2::Sdl, window: &Window) {
+    // Create the OpenGL context
+    window.gl_create_context().unwrap();
 
     // Since OpenGL is not a library, it is a specification, it is the programmer's
     // responsibility to find the address of each function used from opengl. Instead of
@@ -60,11 +60,12 @@ fn main() {
 
     // Initialize & Open a new window
     let window = open_window(&sdl_context);
-    let gl_context = window.gl_create_context().unwrap();
-    initialize_gl(&sdl_context);
+
+    // Initialize everything needed for GL
+    initialize_gl(&sdl_context, &window);
 
     loop {
-        handle_events(&sdl_context, &window);
+        handle_events(&sdl_context);
         unsafe {
             gl::ClearColor(0.2, 0.3, 0.3, 1.0);
             gl::Clear(gl::COLOR_BUFFER_BIT);
