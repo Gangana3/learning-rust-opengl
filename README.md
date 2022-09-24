@@ -24,5 +24,10 @@ In this chapter we are getting familiar with all the basics that make all
 this ecosystem run. We are integrating `GLFW` (I'm using `SDL2` instead) with `OpenGL`
 (I'm using `gl-rs`)
 
-
 By the end of the section I will be drawing triangles to the screen (yes, that's it for now).
+
+
+### Some screenshots
+
+![First triangle](https://i.imgur.com/bHqr96K.png)
+

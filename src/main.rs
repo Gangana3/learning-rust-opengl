@@ -6,7 +6,7 @@ use sdl2::event::{Event, WindowEvent};
 use std::process::exit;
 use sdl2::video::Window;
 use std::ffi::c_void;
-use opengl::hello_triangle::draw_my_first_triangle;
+use opengl::hello_triangle::draw_triangle;
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
 const INITIAL_WINDOW_HEIGHT: u32 = 600;
@@ -66,9 +66,8 @@ fn main() {
     // Initialize everything needed for GL
     initialize_gl(&sdl_context);
 
-    loop {
-        handle_events(&sdl_context);
-        draw_my_first_triangle();
-        window.gl_swap_window();
-    }
+    draw_triangle(
+        || handle_events(&sdl_context),
+        || window.gl_swap_window()
+    );
 }
