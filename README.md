@@ -29,5 +29,12 @@ By the end of the section I will be drawing triangles to the screen (yes, that's
 
 ### Some screenshots
 
+#### First triangle
 ![First triangle](https://i.imgur.com/bHqr96K.png)
+
+
+#### Exercise 1
+
+![Exercise 1](https://i.imgur.com/t3zSUra.png)
+
 

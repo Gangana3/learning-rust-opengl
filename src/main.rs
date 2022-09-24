@@ -7,7 +7,7 @@ use std::process::exit;
 use sdl2::video::Window;
 use std::ffi::c_void;
 use opengl::hello_triangle::draw_triangle;
-use opengl::exercises::exercise1;
+use opengl::exercises::{exercise1, exercise2};
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
 const INITIAL_WINDOW_HEIGHT: u32 = 600;
@@ -67,7 +67,7 @@ fn main() {
     // Initialize everything needed for GL
     initialize_gl(&sdl_context);
 
-    exercise1::main(
+    exercise2::main(
         || handle_events(&sdl_context),
         || window.gl_swap_window()
     );
