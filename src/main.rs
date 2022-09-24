@@ -1,13 +1,15 @@
 extern crate gl;
-extern crate sdl2;
 extern crate opengl;
+extern crate sdl2;
+
+use std::ffi::c_void;
+use std::process::exit;
 
 use sdl2::event::{Event, WindowEvent};
-use std::process::exit;
 use sdl2::video::Window;
-use std::ffi::c_void;
+
+use opengl::exercises_5_8::{exercise1, exercise2, exercise3};
 use opengl::hello_triangle::draw_triangle;
-use opengl::exercises::{exercise1, exercise2};
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
 const INITIAL_WINDOW_HEIGHT: u32 = 600;
@@ -67,8 +69,8 @@ fn main() {
     // Initialize everything needed for GL
     initialize_gl(&sdl_context);
 
-    exercise2::main(
+    exercise3::main(
         || handle_events(&sdl_context),
-        || window.gl_swap_window()
+        || window.gl_swap_window(),
     );
 }

@@ -1,5 +1,5 @@
 /**
-Try to draw 2 triangles next to eaech other using glDrawArrays by adding more vertices to your data
+Now create the same 2 triangles using two different VAOs and VBOs for their data.
 */
 
 use std::ffi::c_void;

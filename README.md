@@ -37,4 +37,10 @@ By the end of the section I will be drawing triangles to the screen (yes, that's
 
 ![Exercise 1](https://i.imgur.com/t3zSUra.png)
 
+#### Exercise 2
+
+Same output as exercise 1.
+
+#### Exercise 3
+
 
