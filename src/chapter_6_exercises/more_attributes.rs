@@ -1,3 +1,5 @@
+/*
+
 /**
 Now create the same 2 triangles using two different VAOs and VBOs for their data.
 */
@@ -105,3 +107,5 @@ pub fn main(on_loop_start: impl Fn(), on_loop_end: impl Fn()) {
         }
     }
 }
+
+*/
