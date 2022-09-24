@@ -8,5 +8,5 @@ out vec3 vertexColor;
 
 void main() {
     gl_Position = vec4(aPosition.x, aPosition.y, aPosition.z, 1.0f);
-    vertexColor = customColor;
+    vertexColor = aPosition;
 }

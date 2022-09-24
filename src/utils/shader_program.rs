@@ -8,6 +8,8 @@ use std::ffi::CString;
 
 /// Shader program that is composed of vertex shader and fragment shader.
 ///
+///
+/// Note that "compile" method must be called before "apply".
 /// # Example
 ///
 /// ```rust
@@ -18,8 +20,8 @@ use std::ffi::CString;
 /// shader_program.apply();
 /// ```
 pub struct ShaderProgram {
-    vertex_shader_content: String,
-    fragment_shader_content: String,
+    vertex_shader_source: String,
+    fragment_shader_source: String,
     pub id: u32
 }
 
@@ -31,15 +33,23 @@ impl ShaderProgram {
         let mut fragment_shader_file = File::open(fragment_shader_path)
             .expect(&format!("Fragment shader file path was not found. {}", fragment_shader_path));
 
-        let mut vertex_shader_content: String = String::new();
-        let mut fragment_shader_content: String = String::new();
+        let mut vertex_shader_source: String = String::new();
+        let mut fragment_shader_source: String = String::new();
 
-        vertex_shader_file.read_to_string(&mut vertex_shader_content);
-        fragment_shader_file.read_to_string(&mut fragment_shader_content);
+        vertex_shader_file.read_to_string(&mut vertex_shader_source);
+        fragment_shader_file.read_to_string(&mut fragment_shader_source);
 
         return Self {
-            vertex_shader_content,
-            fragment_shader_content,
+            vertex_shader_source,
+            fragment_shader_source,
+            id: unsafe {gl::CreateProgram()}
+        }
+    }
+
+    pub fn from_source(vertex_shader_source_code: &str, fragment_shader_source_code: &str) -> Self {
+        return Self {
+            vertex_shader_source: vertex_shader_source_code.to_owned(),
+            fragment_shader_source: fragment_shader_source_code.to_owned(),
             id: unsafe {gl::CreateProgram()}
         }
     }
@@ -103,10 +113,10 @@ impl ShaderProgram {
     /// Compile the vertex and the fragment shaders, and than link them together.
     /// Panic if one of the steps failed.
     pub fn compile(&self) {
-        let vertex_shader = Self::load_shader(&self.vertex_shader_content, gl::VERTEX_SHADER);
+        let vertex_shader = Self::load_shader(&self.vertex_shader_source, gl::VERTEX_SHADER);
         Self::validate_shader_compilation(vertex_shader);
 
-        let fragment_shader = Self::load_shader(&self.fragment_shader_content, gl::FRAGMENT_SHADER);
+        let fragment_shader = Self::load_shader(&self.fragment_shader_source, gl::FRAGMENT_SHADER);
         Self::validate_shader_compilation(fragment_shader);
 
         // Link the program
