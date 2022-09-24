@@ -42,5 +42,11 @@ By the end of the section I will be drawing triangles to the screen (yes, that's
 Same output as exercise 1.
 
 #### Exercise 3
+![Exercise 3](https://i.imgur.com/tfwAOgf.png)
+
+### Chapter 6.5 - More attributes!
+
+![more attributes](https://i.imgur.com/7rXjM4T.png)
+
 
 

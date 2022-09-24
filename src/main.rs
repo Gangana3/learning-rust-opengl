@@ -10,7 +10,7 @@ use sdl2::video::Window;
 
 use opengl::chapter_5_exercises::{exercise1, exercise2, exercise3};
 use opengl::hello_triangle::draw_triangle;
-use opengl::chapter_6_exercises::glowing_green_triangle;
+use opengl::chapter_6_exercises::{glowing_green_triangle, more_attributes};
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
 const INITIAL_WINDOW_HEIGHT: u32 = 600;
@@ -70,7 +70,7 @@ fn main() {
     // Initialize everything needed for GL
     initialize_gl(&sdl_context);
 
-    glowing_green_triangle::main(
+    more_attributes::main(
         || handle_events(&sdl_context),
         || window.gl_swap_window(),
     );
