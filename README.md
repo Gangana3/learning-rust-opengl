@@ -7,6 +7,11 @@ Instead of refactoring all the main branch I just opened another branch ;).
 
 Continue working with shaders.
 
+### Chapter 7 - Applying textures
+
+In this chapter, instead of using the c library `std_image`
+I'll use `image-rs`.
+
 ### Screenshots
 
 ## Exercise 3

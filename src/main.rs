@@ -6,7 +6,7 @@ use std::ffi::c_void;
 use std::process::exit;
 use sdl2::event::{Event, WindowEvent};
 use sdl2::video::Window;
-use opengl::chapter_6_exercises::exercise3;
+use opengl::chapter6_exercises::exercise3;
 
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;

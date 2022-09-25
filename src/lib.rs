@@ -2,4 +2,5 @@
 extern crate sdl2;
 
 pub mod utils;
-pub mod chapter_6_exercises;
+pub mod chapter6_exercises;
+pub mod chapter7_exercises;
