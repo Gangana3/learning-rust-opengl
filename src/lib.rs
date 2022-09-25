@@ -4,5 +4,5 @@ extern crate sdl2;
 mod utils;
 
 pub mod hello_triangle;
-pub mod chapter_5_exercises;
-pub mod chapter_6_exercises;
+pub mod chapter5_exercises;
+pub mod chapter6_exercises;
