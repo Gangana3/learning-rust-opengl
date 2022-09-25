@@ -7,6 +7,7 @@ use std::process::exit;
 use sdl2::event::{Event, WindowEvent};
 use sdl2::video::Window;
 use opengl::chapter6_exercises::exercise3;
+use opengl::chapter7_exercises::my_first_texture;
 
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
@@ -67,8 +68,8 @@ fn main() {
     // Initialize everything needed for GL
     initialize_gl(&sdl_context);
 
-    exercise3::main(
+    my_first_texture::main(
         || handle_events(&sdl_context),
-        || window.gl_swap_window(),
+        || window.gl_swap_window(), 6,
     );
 }

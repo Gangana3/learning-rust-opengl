@@ -33,17 +33,6 @@ unsafe fn create_vertex_buffer_object(vertices: [f32; 9]) -> u32 {
     vertex_buffer_object
 }
 
-
-pub fn get_dynamic_color() -> f32 {
-    let current_timestamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
-    unsafe {
-        let seed = ((current_timestamp % 10000) as f32) / 500.0 % 360.0;
-        println!("{}", seed);
-        (sinf32(seed as f32) + 1.0) / 2.0
-    }
-}
-
-
 pub fn main(on_loop_start: impl Fn(), on_loop_end: impl Fn()) {
     unsafe {
         let mut vertex_array_object: u32 = 0;

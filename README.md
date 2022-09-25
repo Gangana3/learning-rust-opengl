@@ -7,7 +7,7 @@ Instead of refactoring all the main branch I just opened another branch ;).
 
 Continue working with shaders.
 
-### Chapter 7 - Applying textures
+### Chapter 6 - Shaders
 
 In this chapter, instead of using the c library `std_image`
 I'll use `image-rs`.
@@ -20,3 +20,13 @@ TBH, all the exercises in this chapter are too easy so I only completed the
 third one.
 
 ![Exercise 3](https://i.imgur.com/iDWttsC.png);
+
+
+### Chapter 7 - Applying textures
+
+In this chapter, instead of using the c library `std_image`
+I'll use `image-rs`.
+
+## My first texture
+Just a random lava texture from the internet...
+![lava texture](https://i.imgur.com/98uqy32.png)

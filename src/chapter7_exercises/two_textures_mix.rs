@@ -10,7 +10,7 @@ use crate::utils::shader_program::ShaderProgram;
 use image::{ImageFormat, EncodableLayout};
 
 const FIRST_TEXTURE_SHADER_VERTEX: &str = include_str!("../shaders/vertex/first_texture_shader.vert");
-const FIRST_TEXTURE_SHADER_FRAGMENT: &str = include_str!("../shaders/fragment/first_texture_shader.frag");
+const FIRST_TEXTURE_SHADER_FRAGMENT: &str = include_str!("../shaders/fragment/mix_two_textures.frag");
 
 
 unsafe fn create_vertex_buffer_object(vertices: &[f32]) -> u32 {
@@ -78,7 +78,7 @@ unsafe fn create_element_buffer_object(indices: &[u32]) -> u32 {
 
 pub fn create_texture(texture_image_blob: &[u8]) -> u32 {
     let mut texture: u32 = 0;
-    let image = image::load_from_memory(texture_image_blob).unwrap().to_rgb8();
+    let image = image::load_from_memory(texture_image_blob).unwrap().flipv().to_rgb8();
     let image_pixels = image.as_bytes();
 
     unsafe {
@@ -141,10 +141,17 @@ pub fn main(on_loop_start: impl Fn(), on_loop_end: impl Fn(), i: i32) {
         );
         shader_program.compile();
 
-        let texture = create_texture(include_bytes!("../textures/lava_texture.png"));
+        let texture1 = create_texture(include_bytes!("../textures/awesomeface.png"));
+        let texture2 = create_texture(include_bytes!("../textures/lava_texture.png"));
 
-        gl::BindTexture(gl::TEXTURE_2D, texture);
+
+        gl::ActiveTexture(gl::TEXTURE0);    // Activate the first texture unit
+        gl::BindTexture(gl::TEXTURE_2D, texture1);
+
+        gl::ActiveTexture(gl::TEXTURE1);    // Activate the second texture unit
+        gl::BindTexture(gl::TEXTURE_2D, texture2);
         gl::BindVertexArray(vertex_array_object);
+
 
         loop {
             on_loop_start();
@@ -154,6 +161,8 @@ pub fn main(on_loop_start: impl Fn(), on_loop_end: impl Fn(), i: i32) {
             gl::Clear(gl::COLOR_BUFFER_BIT);
 
             shader_program.apply();
+            shader_program.set_int("texture1", 0);
+            shader_program.set_int("texture2", 1);
 
             gl::DrawElements(
                 gl::TRIANGLES, 6,
