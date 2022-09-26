@@ -30,3 +30,17 @@ I'll use `image-rs`.
 ## My first texture
 Just a random lava texture from the internet...
 ![lava texture](https://i.imgur.com/98uqy32.png)
+
+## Mixing 2 textures 
+
+You can see the lava texture behind the emoji
+
+![mix](https://i.imgur.com/UZ6ROJr.png)
+
+## Transformations
+
+This is the result of applying a transformation matrix that:
+* Rotates by 90 degrees
+* Scales down to 50%
+
+![tramsform](https://i.imgur.com/rjahEjw.png)

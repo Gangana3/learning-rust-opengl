@@ -22,7 +22,7 @@ use std::ffi::CString;
 pub struct ShaderProgram {
     vertex_shader_source: String,
     fragment_shader_source: String,
-    pub id: u32
+    pub id: u32,
 }
 
 
@@ -42,16 +42,16 @@ impl ShaderProgram {
         return Self {
             vertex_shader_source,
             fragment_shader_source,
-            id: unsafe {gl::CreateProgram()}
-        }
+            id: unsafe { gl::CreateProgram() },
+        };
     }
 
     pub fn from_source(vertex_shader_source_code: &str, fragment_shader_source_code: &str) -> Self {
         return Self {
             vertex_shader_source: vertex_shader_source_code.to_owned(),
             fragment_shader_source: fragment_shader_source_code.to_owned(),
-            id: unsafe {gl::CreateProgram()}
-        }
+            id: unsafe { gl::CreateProgram() },
+        };
     }
 
     fn validate_shader_compilation(shader: u32) {
@@ -101,7 +101,7 @@ impl ShaderProgram {
                 shader,
                 1,
                 &shader_source_code_c_string.as_ptr(),
-                std::ptr::null()
+                std::ptr::null(),
             );
             gl::CompileShader(shader);
             Self::validate_shader_compilation(shader)
@@ -135,14 +135,14 @@ impl ShaderProgram {
     }
 
     pub fn apply(&self) {
-        unsafe {gl::UseProgram(self.id)};
+        unsafe { gl::UseProgram(self.id) };
     }
-
 
     fn get_uniform_location(&self, uniform_name: &str) -> i32 {
         let uniform_name_c_string = CString::new(uniform_name).unwrap();
-        unsafe {gl::GetUniformLocation(self.id, uniform_name_c_string.as_ptr())}
+        unsafe { gl::GetUniformLocation(self.id, uniform_name_c_string.as_ptr()) }
     }
+
     pub fn set_bool(&self, uniform_name: &str, value: bool) {
         unsafe {
             gl::Uniform1i(self.get_uniform_location(uniform_name), value as i32);
@@ -158,6 +158,17 @@ impl ShaderProgram {
     pub fn set_float(&self, uniform_name: &str, value: f32) {
         unsafe {
             gl::Uniform1f(self.get_uniform_location(uniform_name), value);
+        }
+    }
+
+    pub fn set_mat4(&self, uniform_name: &str, value: &[f32]) {
+        unsafe {
+            gl::UniformMatrix4fv(
+                self.get_uniform_location(uniform_name),
+                1,
+                gl::FALSE,
+                value.as_ptr()
+            )
         }
     }
 }

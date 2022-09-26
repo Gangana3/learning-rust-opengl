@@ -1,6 +1,8 @@
 extern crate gl;
 extern crate opengl;
 extern crate sdl2;
+extern crate nalgebra_glm;
+extern crate core;
 
 use std::ffi::c_void;
 use std::process::exit;
@@ -8,6 +10,8 @@ use sdl2::event::{Event, WindowEvent};
 use sdl2::video::Window;
 use opengl::chapter6_exercises::exercise3;
 use opengl::chapter7_exercises::my_first_texture;
+use nalgebra_glm::{vec4, identity, TMat4, translate, vec3};
+use opengl::chapter8_exercises::my_first_transformation;
 
 
 const INITIAL_WINDOW_WIDTH: u32 = 800;
@@ -68,7 +72,7 @@ fn main() {
     // Initialize everything needed for GL
     initialize_gl(&sdl_context);
 
-    my_first_texture::main(
+    my_first_transformation::main(
         || handle_events(&sdl_context),
         || window.gl_swap_window(), 6,
     );

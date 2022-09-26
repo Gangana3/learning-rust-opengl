@@ -9,4 +9,5 @@ edition = "2021"
 [dependencies]
 sdl2 = "0.33"
 gl = "0.14.0"
+nalgebra-glm = "0.17.0"
 image = "0.24.3"
