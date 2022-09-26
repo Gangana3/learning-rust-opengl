@@ -37,6 +37,11 @@ You can see the lava texture behind the emoji
 
 ![mix](https://i.imgur.com/UZ6ROJr.png)
 
+### Chapter 8 - Transformations
+
+In this chapter, instead of using `glm`, which is a C++ library, 
+I'll be using `nalgebra-glm`.
+
 ## Transformations
 
 This is the result of applying a transformation matrix that:
